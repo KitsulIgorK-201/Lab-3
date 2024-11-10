@@ -1,0 +1,58 @@
+using System;
+using System.IO;
+
+class Program
+{
+    static void Main()
+    {
+        string filePath = "PIVEN.txt"; 
+
+        try
+        {
+            // Перевіряємо, чи існує файл і чи має він хоча б два символи
+            if (File.Exists(filePath))
+            {
+                string content = File.ReadAllText(filePath);
+
+                if (content.Length >= 2)
+                {
+                    char firstChar = content[0];
+                    char secondChar = content[1];
+
+                    // Перевіряємо, чи перші два символи є цифрами
+                    if (char.IsDigit(firstChar) && char.IsDigit(secondChar))
+                    {
+                        int number = int.Parse($"{firstChar}{secondChar}");
+                        Console.WriteLine($"Перші два символи є цифрами: {number}");
+
+                        // Перевіряємо, чи є число парним
+                        if (number % 2 == 0)
+                        {
+                            Console.WriteLine("Знайдене число є парним.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Знайдене число є непарним.");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Перші два символи не є цифрами.");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Файл містить менше ніж два символи.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Файл не знайдено.");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Сталася помилка: {ex.Message}");
+        }
+    }
+}
